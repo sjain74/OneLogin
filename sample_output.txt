@@ -6,8 +6,6 @@
 = 0
 ? 0 - 0
 = 0
-? 0 / 0
-Division with denominator as 0: 
 
 ? 1 + 0
 = 1
@@ -90,5 +88,7 @@ Invalid number of arguments, should be '? <operand> <operator> <operand>'
 Invalid operator, valid operators are: *, /, +, -
 ? 2 + a
 Invalid operand: a
+? 0 / 0
+Division with denominator as 0.
 
 end

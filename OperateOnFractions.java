@@ -18,6 +18,9 @@ Example run:
 Assumptions:
     - There is only one operator in the computation.
     - Operands are all +ve, but a result can be -ve
+
+Notes:
+    - The solution does not try to reduce the final result fraction, just makes it a proper fraction.
 */
 
 // The following class stores whole_numerator/denominator as n/d so that
@@ -59,7 +62,7 @@ public class OperateOnFractions {
     // -> 4 => 4_0/1
     // -> 3/8 => 0_3/8
     // -> 4_3/8 => 4_3/8
-    
+
     private static Fraction parseOperand(String operand) {
 
         String[] split1 = operand.split("_");
@@ -128,7 +131,7 @@ public class OperateOnFractions {
         Integer resultN = operand1.n * operand2.d;
         Integer resultD = operand1.d * operand2.n;
         if (resultD == 0) {
-            System.out.println("Division with denominator as 0: ");
+            System.out.println("Division with denominator as 0.");
             return null;
         }
         return new Fraction(0, resultN, resultD);

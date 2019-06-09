@@ -3,3 +3,5 @@ On mac, I do:
 $> javac OperateOnFractions.java 
 $> java OperateOnFractions < input.txt > output.txt
 $> diff sample_output.txt output.txt 
+ 
+No difference in files implies that the code is passing the existing tests.
