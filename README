@@ -1,4 +1,5 @@
 On mac, I do:
 
 $> javac OperateOnFractions.java 
-$> java OperateOnFractions < input.txt
+$> java OperateOnFractions < input.txt > output.txt
+$> diff sample_output.txt output.txt 
