@@ -1,0 +1,4 @@
+On mac, I do:
+
+$> javac OperateOnFractions.java 
+$> java OperateOnFractions < input.txt
