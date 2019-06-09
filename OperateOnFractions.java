@@ -1,10 +1,11 @@
 import java.util.*;
 
 /*
-Write a command line program in the language of your choice that will take operations on fractions as an input and produce a fractional result.
-    - Legal operators shall be *, /, +, - (multiply, divide, add, subtract)
-    - Operands and operators shall be separated by one or more spaces
-    - Mixed numbers will be represented by whole_numerator/denominator. e.g. "3_1/4"
+A command line program that takes operations on fractions as an input and produce a fractional result:
+
+    - Legal operators are: *, /, +, - (multiply, divide, add, subtract)
+    - Operands and operators are separated by one or more spaces
+    - Mixed numbers are represented by whole_numerator/denominator. e.g. "3_1/4"
     - Improper fractions and whole numbers are also allowed as operands 
 
 Example run:
@@ -13,20 +14,15 @@ Example run:
 
     ? 2_3/8 + 9/8
     = 3_1/2
-*/
 
-/*
-    Assumptions:
-    - there is only one operator in the computation.
-    - operands are are all +ve, but a result can be -ve
+Assumptions:
+    - There is only one operator in the computation.
+    - Operands are all +ve, but a result can be -ve
 */
 
 // The following class stores whole_numerator/denominator as n/d so that
-// subsequently the operations can be performed easily:
-//
-// this.n = (whole * denominator) + numerator;
-// this.d = denominator
-// 
+// subsequent operations can be performed easily:
+
 class Fraction {
     Integer n;      // numerator
     Integer d;      // denominator
@@ -63,6 +59,7 @@ public class OperateOnFractions {
     // -> 4 => 4_0/1
     // -> 3/8 => 0_3/8
     // -> 4_3/8 => 4_3/8
+    
     private static Fraction parseOperand(String operand) {
 
         String[] split1 = operand.split("_");
@@ -100,7 +97,6 @@ public class OperateOnFractions {
             nStr = split2[0];
             dStr = split2[1];
         }
-        // For debugging: System.out.println("wStr = " + wStr + ", nStr = " + nStr + ", dStr = " + dStr);
 
         Integer wInt;
         Integer nInt;
@@ -113,7 +109,6 @@ public class OperateOnFractions {
             System.out.println("Invalid operand: " + operand);
             return null;
         }
-        // For debugging: System.out.println("wInt = " + wInt + ", nInt = " + nInt + ", dInt = " + dInt);
 
         if (dInt == 0) {
             System.out.println("Invalid operand, denominator is 0: " + operand);
@@ -126,14 +121,12 @@ public class OperateOnFractions {
     private static Fraction computeMultiply(Fraction operand1, Fraction operand2) {
         Integer resultN = operand1.n * operand2.n;
         Integer resultD = operand1.d * operand2.d;
-        // For debugging: System.out.println("resultN = " + resultN + ", resultD = " + resultD);
         return new Fraction(0, resultN, resultD);
     }
 
     private static Fraction computeDivide(Fraction operand1, Fraction operand2) {
         Integer resultN = operand1.n * operand2.d;
         Integer resultD = operand1.d * operand2.n;
-        // For debugging: System.out.println("resultN = " + resultN + ", resultD = " + resultD);
         if (resultD == 0) {
             System.out.println("Division with denominator as 0: ");
             return null;
@@ -144,16 +137,16 @@ public class OperateOnFractions {
     private static Fraction computePlus(Fraction operand1, Fraction operand2) {
         Integer resultN = (operand1.n * operand2.d) + (operand2.n * operand1.d);
         Integer resultD = operand1.d * operand2.d;
-        // For debugging: System.out.println("resultN = " + resultN + ", resultD = " + resultD);
         return new Fraction(0, resultN, resultD);
     }
 
     private static Fraction computeMinus(Fraction operand1, Fraction operand2) {
         Integer resultN = (operand1.n * operand2.d) - (operand2.n * operand1.d);
         Integer resultD = operand1.d * operand2.d;
-        // For debugging: System.out.println("resultN = " + resultN + ", resultD = " + resultD);
         return new Fraction(0, resultN, resultD);
     }
+
+    // Parse a compute command line, and call appropriate computeMultiply/Divide/Plus/Minus functions
 
     private static String compute(String[] commandAndArgs) {
         if (commandAndArgs.length != 4) {
@@ -194,6 +187,12 @@ public class OperateOnFractions {
         return computeResult.toString();
     }
     
+    // Read commands from stdin:
+    // - a command can either begin with "?" or with "end"
+    // - ? => compute
+    // - end => end of reading from stdin
+    // - blank lines and lines starting with '#' are ignored.
+
     public static void main(String[] args) {
         
         Scanner scanner = new Scanner(System.in);
